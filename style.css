@@ -1,0 +1,111 @@
+/*전체적으로 참고: https://0ver-grow.tistory.com/933*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+@import "reset.css";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    position: fixed; /*위치 상단고정*/
+    width: 100%; /*화면창에 너비 맞추기*/
+    background-color: #28394e;
+    color: white; /*폰트색*/
+    display: flex;
+    justify-content: space-between; /*현재는 중심축이 수평축*/
+    align-items: center; /*현재는 반대축이 수직축*/
+    padding: 24px 38px; /*위아래  24px, 양옆 38px*/
+}
+a {
+    text-decoration: none; /*모든 ankor태그의 컨텐츠에는 default로 밑줄 존재. 이를 제거*/
+    color: white; /*폰트색*/
+}
+
+.navbar__title {
+    display: flex; /*로고와 타이틀 일렬로 배치*/
+    padding: 14px 0; /*위아래 14px, 양옆은 header에서 줬으므로 패스*/
+}
+.navbar__title i,
+.navbar__hamberger {
+    color: #d69f73;
+    font-size: 24px;
+}
+.navbar__title h1{
+    font-size: 24px;
+    font-weight: 700; /*폰트두께*/
+    margin-left: 12px; /*아이콘과 여유공간 확보*/
+}
+
+
+.navbar__menu {
+    width:33%; /*너비를 1/3로 해서 space-between시 정가운데로 오게하기*/
+    display: flex; /*메뉴를 일렬로 배치*/
+    list-style: none; /*ul태그의 점을 제거*/
+    padding-left: 0; /*패딩때문에 우측으로 치우쳐있는것을 되돌림*/
+}
+.navbar__menu li,
+.navbar__sns li  {
+    padding: 12px 12px; /*마우스클릭 여유공간 확보*/
+}
+.navbar__menu li:hover {
+    background-color: #d69f73;
+    border-radius: 10px; /*테두리 둥글게*/
+}
+
+.navbar__sns{
+    display: flex;
+    font-size: 18px; /*아이콘크기*/
+}
+.navbar__hamberger {
+    display: none; /*!!일반 사이즈에선 나타나지 않음*/
+    position: absolute; /*소속된 배치 무관하게 위치설정*/
+    right: 38px; /*우측으로부터 38px 거리둠*/
+    top: 24px; /*위로부터 24px 거리둠*/
+}
+
+/*
+!!레이아웃을 반응형으로 만들때는 media쿼리 사용
+특정 사이즈 이하가 될 경우, 웹 사이트의 메뉴가 제대로 보이지 않음
+이럴때 메뉴바를 아래로 내려가도록 만들자.
+*/
+
+@media screen and (max-width:768px) {
+    /*타이틀과 메뉴바가 수직으로 나오도록*/
+    header {
+        flex-direction: column;
+        align-items: flex-start; /*로고, 메뉴바 모두 왼쪽 정렬*/
+        padding: 8px 24px; /*??hover시 한줄 가득 색상표시 안되도록*/
+    }
+    /*메뉴바가 한줄에 하나씩*/
+    .navbar__menu {
+        display: none; /*현사이즈에서 숨기기*/
+        flex-direction: column;
+        align-items: center; /*메뉴바만 가운데 정렬*/
+        width: 100%; /*가운데정렬을 위해 너비를 화면창에 맞춤*/
+        margin-bottom: 18px;
+    }
+    /*메뉴바 hover시 너비 꽉차게 색상표시*/
+    .navbar__menu li {
+        width: 100%;
+        text-align: center; /*text는 왼쪽 정렬이 기본값이므로 center로 수정*/
+    }
+    /*sns아이콘을 가운데로 */
+    .navbar__sns {
+        display: none; /*현사이즈에서 숨기기*/
+        justify-content: center; /*sns아이콘 가운데 정렬*/
+        width: 100%; /*가운데정렬을 위해 너비를 화면창에 맞춤*/    
+    }
+    /*!!햄버거 버튼*/
+    .navbar__hamberger {
+        display: block;
+    }
+    /*!!햄버거 버튼 클릭시 active요소 추가*/
+    .navbar__menu .active,
+    .navbar__sns .active {
+        display: flex;
+    }
